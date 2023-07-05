@@ -51,7 +51,7 @@
                 {% endfor %}
             </div>
             <!-- Task: show questions and choices -->
-            <!-- <HINT> Use Bootstrap Collapse to hide exam first, more details could be found here
+            <!-- Use Bootstrap Collapse to hide exam first, more details could be found here
             https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp-->
 
             <!--
@@ -75,28 +75,84 @@
             <input type="check" name="choice_{{choice.id}}" id="{{choice.id}}" ...>
             -->
 
-            <!-- A choice submission form example
+            <!-- Choice Submission Form  -->
             <form id="questionform" action="point to a submit view" method="post">
-                        ... for each question in the course ...
                         <div class="card mt-1">
-                            <div class="card-header"><h5>{{ question.question_text}}</h5></div>
+                            <div class="card-header"><h5>{{ question.question1}}</h5></div>
                             {% csrf_token %}
                             <div class="form-group">
-                               ... for each choice in the question ...
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.id}}"
-                                               class="form-check-input" id="{{choice.id}}"
-                                               value="{{choice.id}}">{{ choice.choice_text }}
+                                        <input type="checkbox" name="choice_{{choice.q1c1}}"
+                                               class="form-check-input" id="{{choice.q1c1}}"
+                                               value="{{choice.q1c1}}">{{ choice.q1c1 }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q1c2}}"
+                                               class="form-check-input" id="{{choice.q1c2}}"
+                                               value="{{choice.q1c2}}">{{ choice.q1c2 }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-2">
+                            <div class="card-header"><h5>{{ question.question2}}</h5></div>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q2c1}}"
+                                               class="form-check-input" id="{{choice.q2c1}}"
+                                               value="{{choice.q2c1}}">{{ choice.q2c1 }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q2c2}}"
+                                               class="form-check-input" id="{{choice.q2c2}}"
+                                               value="{{choice.q2c2}}">{{ choice.q2c2 }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q2c3}}"
+                                               class="form-check-input" id="{{choice.q2c3}}"
+                                               value="{{choice.q2c3}}">{{ choice.q2c3 }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <div class="card-header"><h5>{{ question.question3}}</h5></div>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q3c1}}"
+                                               class="form-check-input" id="{{choice.q3c1}}"
+                                               value="{{choice.q3c1}}">{{ choice.q3c1 }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q3c2}}"
+                                               class="form-check-input" id="{{choice.q3c2}}"
+                                               value="{{choice.q3c2}}">{{ choice.q3c2 }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="choice_{{choice.q3c3}}"
+                                               class="form-check-input" id="{{choice.q3c3}}"
+                                               value="{{choice.q3c3}}">{{ choice.q3c3 }}
                                     </label>
                                 </div>
                             </div>
                         </div>
                     <input class="btn btn-success btn-block" type="submit" value="Submit">
-            </form> -->
-
-            <!--Check here to see more details Bootstrap checkbox
-             https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp-->
+            </form>
     </div>
 </body>
 </html>
