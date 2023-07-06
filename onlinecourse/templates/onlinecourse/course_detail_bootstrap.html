@@ -76,83 +76,37 @@
             -->
 
             <!-- Choice Submission Form  -->
-            <form id="questionform" action="point to a submit view" method="post">
+            <button data-toggle="collapse" data-target="#exam"
+                 class="btn btn-info" role="button" style="width:100%">
+                Start Exam</button>
+
+            <div id="exam" class="collapse">
+                 {% if user.is_authenticated %}
+                    <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="post">
+                         {% for question in course.question_set.all %}
                         <div class="card mt-1">
-                            <div class="card-header"><h5>{{ question.question1}}</h5></div>
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q1c1}}"
-                                               class="form-check-input" id="{{choice.q1c1}}"
-                                               value="{{choice.q1c1}}">{{ choice.q1c1 }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q1c2}}"
-                                               class="form-check-input" id="{{choice.q1c2}}"
-                                               value="{{choice.q1c2}}">{{ choice.q1c2 }}
-                                    </label>
-                                </div>
+                            <div class="card-header">
+                                <h5>{{question.title}}</h5>
                             </div>
-                        </div>
-                        <div class="card mt-2">
-                            <div class="card-header"><h5>{{ question.question2}}</h5></div>
                             {% csrf_token %}
+                            <b>{{question.text}}</b><br/>
                             <div class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q2c1}}"
-                                               class="form-check-input" id="{{choice.q2c1}}"
-                                               value="{{choice.q2c1}}">{{ choice.q2c1 }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q2c2}}"
-                                               class="form-check-input" id="{{choice.q2c2}}"
-                                               value="{{choice.q2c2}}">{{ choice.q2c2 }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q2c3}}"
-                                               class="form-check-input" id="{{choice.q2c3}}"
-                                               value="{{choice.q2c3}}">{{ choice.q2c3 }}
-                                    </label>
-                                </div>
+                                {% for choice in question.choice_set.all %}
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" name="choice_{{choice.id}}"
+                                                class="form-check-input" id="{{choice.id}}"
+                                                value="{{choice.id}}">{{ choice.text }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        </div>
-                        <div class="card mt-3">
-                            <div class="card-header"><h5>{{ question.question3}}</h5></div>
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q3c1}}"
-                                               class="form-check-input" id="{{choice.q3c1}}"
-                                               value="{{choice.q3c1}}">{{ choice.q3c1 }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q3c2}}"
-                                               class="form-check-input" id="{{choice.q3c2}}"
-                                               value="{{choice.q3c2}}">{{ choice.q3c2 }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="choice_{{choice.q3c3}}"
-                                               class="form-check-input" id="{{choice.q3c3}}"
-                                               value="{{choice.q3c3}}">{{ choice.q3c3 }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    <input class="btn btn-success btn-block" type="submit" value="Submit">
-            </form>
+                        </div>                        
+                        {% endfor %}
+                         <input class="btn btn-success btn-block" type="submit" value="Submit">
+                    </form>       
+                 {% endif %}
+            </div>
     </div>
 </body>
 </html>

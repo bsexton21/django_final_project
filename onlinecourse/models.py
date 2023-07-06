@@ -102,15 +102,12 @@ class Enrollment(models.Model):
     # Has question content
 class Question(models.Model):
     # Foreign key to lesson
-    lesson=models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     # question text
-    question1=models.CharField(max_length=100)
-    question2=models.CharField(max_length=100)
-    question3=models.CharField(max_length=100)
-    # question grade/mark
-    score1=models.IntegerField(max_length=1)
-    score2=models.IntegerField(max_length=1)
-    score3=models.IntegerField(max_length=1)
+    title = models.CharField(max_length=100, default="question title")
+    text = models.CharField(max_length=100, default="question text")
+    # question grade
+    grade = models.FloatField(default=5.0)
     # A sample model method to calculate if learner get the score of the question
     def is_get_score(self, selected_ids):
         all_answers = self.choice_set.filter(is_correct=True).count()
@@ -127,20 +124,11 @@ class Question(models.Model):
     # Indicate if this choice of the question is a correct one or not
 class Choice(models.Model):
     # Foreign key to question
-    lesson=models.ForeignKey(Question, on_delete=models.CASCADE)
-    # Choice Text q=question, c=choice, a=answer
-    q1c1=models.CharField(max_length=100)
-    q1c2=models.CharField(max_length=100)
-    q1a1=models.CharField(max_length=100)
-    q2c1=models.CharField(max_length=100)
-    q2c2=models.CharField(max_length=100)
-    q2c3=models.CharField(max_length=100)
-    q2a1=models.CharField(max_length=100)
-    q3c1=models.CharField(max_length=100)
-    q3c2=models.CharField(max_length=100)
-    q3c3=models.CharField(max_length=100)
-    q3a1=models.CharField(max_length=100)
-
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=100, default="question text")
+    # Choice Text
+    q_correct = models.BooleanField(default=False)
+    
 # The submission model
 # One enrollment could have multiple submission
 # One submission could have multiple choices
