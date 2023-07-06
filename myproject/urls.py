@@ -21,4 +21,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('onlinecourse/', include('onlinecourse.urls')),
+    path(route='<int:course_id>/submit/',view=views.submit.as_view(),name='submit'),
+    path(route='course/<int:course_id>/submission/<int:submission_id>/result/',view=views.show_exam_result.as_view(),name='show_exam_result'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
